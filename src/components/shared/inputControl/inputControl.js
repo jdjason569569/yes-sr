@@ -1,5 +1,5 @@
 
-import '../inputControl/inputControl.css';
+import './inputControl.css';
 
 export function InputControl(props) {
     return (
@@ -7,5 +7,5 @@ export function InputControl(props) {
             {props.label && <label>{props.label}</label>}
             <input type="text" {...props}></input>
         </div>
-    )
+    );
 }

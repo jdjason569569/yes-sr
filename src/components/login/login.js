@@ -1,9 +1,10 @@
-import { InputControl } from '../inputControl/inputControl';
-import '../login/login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
+
+import { InputControl } from '../shared/inputControl/inputControl';
+import '../login/login.css';
 
 
 
@@ -27,11 +28,10 @@ export default function Login() {
         setSubmitButtonDisabled(true);
         signInWithEmailAndPassword(auth, values.email, values.pass).then((response) => {
             setSubmitButtonDisabled(false);
-            navigate("/")
+            navigate("/home");
         }).catch(error => {
             setSubmitButtonDisabled(false);
             setError(error.message);
-
         });
     }
 
@@ -55,7 +55,7 @@ export default function Login() {
 
                 <div className='footer'></div>
                 <b className='error'>{error}</b>
-                <button onClick={authUser}>login btn</button>
+                <button className="btn btn-primary" onClick={authUser} disabled={submitButtonDisabled}>login btn</button>
                 <p>
                     Crear cuenta
                     <span>

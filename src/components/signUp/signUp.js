@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../signUp/signUp.css';
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { InputControl } from '../inputControl/inputControl';
+
+import { InputControl } from '../shared/inputControl/inputControl';
+import '../signUp/signUp.css';
 
 
 export default function SignUp() {
@@ -16,6 +17,7 @@ export default function SignUp() {
     });
     const [error, setError] = useState([]);
     const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+
     const registro = () => {
         if (!values.name || !values.email || !values.pass) {
             setError("Diligencie todos los campos");
@@ -23,13 +25,14 @@ export default function SignUp() {
         }
         setError("");
         setSubmitButtonDisabled(true);
+
         createUserWithEmailAndPassword(auth, values.email, values.pass).then(async (response) => {
             setSubmitButtonDisabled(false);
             const user = response.user;
             await updateProfile(user, {
                 displayName: values.name,
             });
-            navigate("/");
+            navigate("/login");
         }).catch(error => {
             setSubmitButtonDisabled(false);
             setError(error.message);
@@ -58,7 +61,7 @@ export default function SignUp() {
                     <p>
                         Si ya tienes una cuenta
                         <span>
-                          <Link to="/login">Login</Link>
+                          <Link to="/">Login</Link>
                         </span>
                     </p>
                 </div>
