@@ -42,28 +42,29 @@ export default function Login() {
         setValues({ ...values, pass: event.target.value });
     }
     return (
-        <div className='container'>
-            <div className='innerBox'>
-                <h1 className='heading'>Login</h1>
-                <InputControl label="Email"
-                    placeholder="Ingrese su correo"
-                    onChange={handleEmail}></InputControl>
-
-                <InputControl label="Password"
+        <>
+        <div style={{marginTop: '200px'}} className='container'>
+            <div className="login-form">
+                
+                <div className="form-group">
+                    <InputControl 
+                        placeholder="Ingrese su correo"
+                        onChange={handleEmail}></InputControl>
+                </div>
+                <div className="form-group">
+                <InputControl 
                     placeholder="Ingrese su contraseña"
                     onChange={handlePass}></InputControl>
-
-                <div className='footer'></div>
-                <b className='error'>{error}</b>
-                <button className="btn btn-primary" onClick={authUser} disabled={submitButtonDisabled}>login btn</button>
+                </div>
+                <button type="submit" onClick={authUser} className="btn btn-primary">Iniciar sesión</button>
                 <p>
                     Crear cuenta
                     <span>
                         <Link to="/signup">Ir</Link>
                     </span>
                 </p>
-
             </div>
         </div>
+        </>
     );
 }

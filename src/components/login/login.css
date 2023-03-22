@@ -1,19 +1,16 @@
-.container{
-
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
 }
 
-.innerBox{
-
+.login-form {
+    padding: 20px;
+    border-radius: 20px;
+    background-color: var(--primary-color);
 }
 
-.heading{
-
-}
-
-.footer{
-
-}
-
-.error{
-
+.form-group {
+    margin-bottom: 20px
 }
