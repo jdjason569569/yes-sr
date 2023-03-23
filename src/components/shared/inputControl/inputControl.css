@@ -1,3 +1,10 @@
-.container{
-    
+.input{
+    border-radius: 10px;
+}
+
+.input::placeholder{
+    color: gray;
+    font-size: 12px;
+    text-align: center;
+    font-weight: bolder;
 }

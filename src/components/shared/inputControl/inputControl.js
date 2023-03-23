@@ -3,9 +3,9 @@ import './inputControl.css';
 
 export function InputControl(props) {
     return (
-        <div className='container'>
+        <div>
             {props.label && <label>{props.label}</label>}
-            <input type="text" {...props}></input>
+            <input className='input' type={props.type} {...props}></input>
         </div>
     );
 }

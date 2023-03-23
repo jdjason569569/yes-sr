@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import { InputControl } from '../shared/inputControl/inputControl';
 import '../login/login.css';
+import logo from '../../assets/yesSr.png';
 
 
 
@@ -43,28 +44,30 @@ export default function Login() {
     }
     return (
         <>
-        <div style={{marginTop: '200px'}} className='container'>
-            <div className="login-form">
-                
-                <div className="form-group">
-                    <InputControl 
-                        placeholder="Ingrese su correo"
-                        onChange={handleEmail}></InputControl>
+            <div style={{ marginTop: '200px' }} className='container'>
+                <div className="login-form">
+                    <div className='image-container' >
+                        <img className="image" src={logo}/>
+                    </div>
+
+                    <div className="form-group">
+                        <InputControl
+                            type="text"
+                            placeholder="Tu correo"
+                            onChange={handleEmail}></InputControl>
+                    </div>
+                    <div className="form-group">
+                        <InputControl
+                            type="password"
+                            placeholder="Contraseña"
+                            onChange={handlePass}></InputControl>
+                    </div>
+                    <button type="submit" onClick={authUser} className="btn btn-light btn-sm rounded btn-style">Iniciar sesión</button>
+                    <div>
+                        <Link to="/signup" className='create-font'>Crear cuenta</Link>
+                    </div>
                 </div>
-                <div className="form-group">
-                <InputControl 
-                    placeholder="Ingrese su contraseña"
-                    onChange={handlePass}></InputControl>
-                </div>
-                <button type="submit" onClick={authUser} className="btn btn-primary">Iniciar sesión</button>
-                <p>
-                    Crear cuenta
-                    <span>
-                        <Link to="/signup">Ir</Link>
-                    </span>
-                </p>
             </div>
-        </div>
         </>
     );
 }
