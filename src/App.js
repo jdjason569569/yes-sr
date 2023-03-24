@@ -1,5 +1,4 @@
 import './App.css';
-import './vars.css';
 
 import { MyRoutes } from './routes/routes';
 
