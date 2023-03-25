@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom"
-import { auth } from "../../firebase"
 import '../home/home.css';
 import logo from '../../assets/yesSr.png';
-
+import { auth } from "../../firebase";
 
 
 
 export default function Home({ name }) {
     const navigate = useNavigate();
+
 
     const exit = () => {
         navigate("/");

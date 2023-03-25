@@ -1,33 +1,42 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { auth } from "../firebase";
 import { useEffect, useState } from 'react';
-import { auth } from '../firebase';
+
 
 import Home from '../components/home/home';
 import Login from '../components/login/login';
 import SignUp from '../components/signUp/signUp';
+import { ProtectedRoute } from '../components/shared/protectedRoute';
+
+
 
 
 export function MyRoutes() {
 
-    const [userName, setUserName] = useState([]);
+    const [userName, setUserName] = useState();
 
     useEffect(() => {
-        auth.onAuthStateChanged((user) => {
+         auth.onAuthStateChanged((user) => {
             if (user) {
                 setUserName(user.email);
             } else {
                 setUserName("");
             }
         });
-    }, [])
+    }, []);
 
     return (
         <Router>
             <Routes>
                 <Route exact path='/' element={<Login />}></Route>
-                <Route exact path='/home' element={<Home name={userName}/>}></Route>
+                <Route exact path='/home' element={
+                    <ProtectedRoute name={userName}>
+                        <Home name={userName}/>
+                    </ProtectedRoute>
+                }></Route>
                 <Route exact path='/signup' element={<SignUp />}></Route>
             </Routes>
         </Router>
     );
 }
+
