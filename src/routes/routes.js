@@ -16,7 +16,7 @@ export function MyRoutes() {
     const [userName, setUserName] = useState();
 
     useEffect(() => {
-         auth.onAuthStateChanged((user) => {
+        auth.onAuthStateChanged((user) => {
             if (user) {
                 setUserName(user.email);
             } else {
@@ -29,11 +29,9 @@ export function MyRoutes() {
         <Router>
             <Routes>
                 <Route exact path='/' element={<Login />}></Route>
-                <Route exact path='/home' element={
-                    <ProtectedRoute name={userName}>
-                        <Home name={userName}/>
-                    </ProtectedRoute>
-                }></Route>
+                <Route element={<ProtectedRoute name={userName} />}>
+                    <Route exact path='/home' element={<Home name={userName} />}></Route>
+                </Route>
                 <Route exact path='/signup' element={<SignUp />}></Route>
             </Routes>
         </Router>
