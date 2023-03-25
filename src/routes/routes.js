@@ -7,6 +7,8 @@ import Home from '../components/home/home';
 import Login from '../components/login/login';
 import SignUp from '../components/signUp/signUp';
 import { ProtectedRoute } from '../components/shared/protectedRoute';
+import Task from '../components/task/task';
+
 
 
 
@@ -31,6 +33,7 @@ export function MyRoutes() {
                 <Route exact path='/' element={<Login />}></Route>
                 <Route element={<ProtectedRoute name={userName} />}>
                     <Route exact path='/home' element={<Home name={userName} />}></Route>
+                    <Route  path='/home/task' element={<Task/>}></Route>
                 </Route>
                 <Route exact path='/signup' element={<SignUp />}></Route>
             </Routes>
