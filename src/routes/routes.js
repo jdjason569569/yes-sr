@@ -8,6 +8,8 @@ import Login from '../components/login/login';
 import SignUp from '../components/signUp/signUp';
 import { ProtectedRoute } from '../components/shared/protectedRoute';
 import Task from '../components/task/task';
+import NavigationComponent from '../components/navigation/navigation-component';
+
 
 
 
@@ -15,20 +17,23 @@ import Task from '../components/task/task';
 
 export function MyRoutes() {
 
-    const [userName, setUserName] = useState();
+    const [userName, setUserName] = useState(null);
 
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
             if (user) {
                 setUserName(user.email);
             } else {
-                setUserName("");
+                setUserName(null);
             }
         });
     }, []);
 
+    console.log(userName);
+
     return (
         <Router>
+             {userName && <NavigationComponent/>}
             <Routes>
                 <Route exact path='/' element={<Login />}></Route>
                 <Route element={<ProtectedRoute name={userName} />}>

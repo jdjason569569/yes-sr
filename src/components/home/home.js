@@ -18,17 +18,6 @@ export default function Home({ name }) {
 
     return (
         <>
-            <NavigationComponent />
-
-            
-
-
-
-
-
-
-
-
             <div className="container-home">
                 <div>
                     <h2>{name ? `Bienvenido  ${name}` : "Inicia session"}</h2>
