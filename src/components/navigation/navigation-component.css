@@ -25,10 +25,6 @@
     position: absolute;
 }
 
-.image {
-    max-width: 100%;
-}
-
 
 
 ._btn:not(:first-child) {

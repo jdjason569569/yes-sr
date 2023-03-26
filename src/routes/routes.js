@@ -11,10 +11,6 @@ import Task from '../components/task/task';
 import NavigationComponent from '../components/navigation/navigation-component';
 
 
-
-
-
-
 export function MyRoutes() {
 
     const [userName, setUserName] = useState(null);
@@ -26,10 +22,11 @@ export function MyRoutes() {
             } else {
                 setUserName(null);
             }
-        });
-    }, []);
+            console.log(userName);
+        }, []);
+    });
 
-    console.log(userName);
+    
 
     return (
         <Router>
@@ -40,7 +37,7 @@ export function MyRoutes() {
                     <Route exact path='/home' element={<Home name={userName} />}></Route>
                     <Route  path='/home/task' element={<Task/>}></Route>
                 </Route>
-                <Route exact path='/signup' element={<SignUp />}></Route>
+                <Route exact path='/signup'  element={<SignUp />}></Route>
             </Routes>
         </Router>
     );

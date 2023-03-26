@@ -1,10 +1,8 @@
 import '../home/home.css';
-import {  Routes, Route } from 'react-router-dom';
+
 
 import { auth } from "../../firebase";
-import NavigationComponent from "../navigation/navigation-component";
 import { useNavigate } from 'react-router-dom';
-import Task from '../task/task';
 
 
 export default function Home({ name }) {
