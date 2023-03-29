@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, setPersistence, browserSessionPersistence } from 'firebase/auth';
 import { useState } from 'react';
 
 import { InputControl } from '../shared/inputControl/inputControl';
@@ -21,19 +21,22 @@ export default function Login() {
     const [error, setError] = useState([]);
     const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
-    const authUser = () => {
+    const authUser = async () => {
         if (!values.email || !values.pass) {
             setError("Datos incompletos");
             return;
         }
         setSubmitButtonDisabled(true);
-        signInWithEmailAndPassword(auth, values.email, values.pass).then((response) => {
+        await signInWithEmailAndPassword(auth, values.email, values.pass).then( () => {
             setSubmitButtonDisabled(false);
             navigate("/home");
+           
         }).catch(error => {
             setSubmitButtonDisabled(false);
             setError(error.message);
         });
+
+        await setPersistence(auth, browserSessionPersistence);
     }
 
     const handleEmail = (event) => {

@@ -74,12 +74,12 @@ export default function SignUp() {
                 <button onClick={register}
                     className="btn btn-light btn-sm rounded btn-style"
                     disabled={submitButtonDisabled}>Guardar</button>
-                <p className='p_style'>
+                {!name && <p className='p_style'>
                     Si ya tienes una cuenta
                     <span style={{marginLeft: '5px'}}>
                         <Link to="/">Login</Link>
                     </span>
-                </p>
+                </p>}
             </div>
         </div>
     )
