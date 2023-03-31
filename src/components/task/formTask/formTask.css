@@ -1,0 +1,24 @@
+.task-form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-input{
+    width: 350px;
+    font-size: 18px;
+    background-color: white;
+    padding: 14px 32px 14px 16px;
+    border-radius: 10px;
+    border: 2px solid red;
+    margin-top: 9px;
+}
+
+.task-botton{
+    box-shadow: 2px 2px 5px 1px black;
+    background: red;
+    border: none;
+    color: white;
+    margin-top: 15px;
+}
