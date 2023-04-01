@@ -4,15 +4,25 @@ import './formTask.css';
 
 export default function ({ addTask }) {
 
-    const [input, setInput] = useState('');
+    const [input, setInput] = useState(null);
+    const [isEnabledButton, setIsEnabledButton] = useState(true);
+
 
     const handleEvent = e => {
         setInput(e.target.value);
+        if(input){
+            setIsEnabledButton(false);
+        }
     }
 
     const handleSend = e => {
         e.preventDefault();
-        addTask(createTask());
+        if(input !== ''){
+            addTask(createTask());
+            setInput('');
+            setIsEnabledButton(true);
+        }
+        
     }
 
     const createTask = () => {
@@ -30,9 +40,11 @@ export default function ({ addTask }) {
           type='text'
           placeholder='Escribe una tarea'
           name='texto'
+          autocomplete="off"
+          value={input}
           onChange={handleEvent}
         />
-        <button className="btn-sm rounded task-botton" >
+        <button  hidden={isEnabledButton} className="btn-sm rounded task-botton" >
          Agregar Tarea
         </button>
      </form>
