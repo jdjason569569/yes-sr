@@ -40,6 +40,7 @@ export default function Task() {
               key={task.id}
               id={task.id}
               text={task.text}
+              taskDate={task.taskDate}
               completed={task.completed}
               deleteTask={deleteTask}
               completeTask={completeTask} />)
