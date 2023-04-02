@@ -6,11 +6,20 @@ import Homeworks from './homework/homework';
 export default function Task() {
 
   const [tasks, setTasks] = useState([]);
+  const [taskEdit, setTaskEdit] = useState(null);
 
   const addTask = task => {
     if (task) {
-      task.text = task.text.trim();
-      setTasks([task, ...tasks]);
+      const taskEdit = tasks.find(taskElement => taskElement.id === task.id)
+      if (taskEdit) {
+        taskEdit.text = task.text;
+        const updateTask = tasks.map(taskElement => (taskElement.id === task.id ? taskEdit : taskElement));
+        setTasks([...updateTask]);
+        setTaskEdit(null);
+      } else {
+        task.text = task.text.trim();
+        setTasks([task, ...tasks]);
+      }
     }
   }
 
@@ -28,10 +37,17 @@ export default function Task() {
     setTasks(updatedTask);
   }
 
+  const editTask = id => {
+    const task = tasks.find(task => task.id === id);
+    setTaskEdit(task);
+  }
+
+
+
 
   return (
     <div className='container-task'>
-      <FormTask addTask={addTask}></FormTask>
+      <FormTask addTask={addTask} taskEdit={taskEdit}></FormTask>
 
       <div className='task-list-content'>
         {
@@ -43,7 +59,8 @@ export default function Task() {
               taskDate={task.taskDate}
               completed={task.completed}
               deleteTask={deleteTask}
-              completeTask={completeTask} />)
+              completeTask={completeTask}
+              editTask={editTask} />)
         }
       </div>
     </div>)

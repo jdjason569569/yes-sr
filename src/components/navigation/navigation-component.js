@@ -6,10 +6,8 @@ import { Link, useLocation } from "react-router-dom"
 
 export default function NavigationComponent() {
 
-
     const { pathname } = useLocation();
     
-
     return (
         <>
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -64,5 +62,5 @@ export default function NavigationComponent() {
                     </label>
                 </div>
             </>
-    )
+    );
 }

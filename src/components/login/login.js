@@ -8,8 +8,6 @@ import '../login/login.css';
 import logo from '../../assets/yesSr.png';
 
 
-
-
 export default function Login() {
 
     const navigate = useNavigate();
@@ -27,15 +25,13 @@ export default function Login() {
             return;
         }
         setSubmitButtonDisabled(true);
-        await signInWithEmailAndPassword(auth, values.email, values.pass).then( () => {
+        await signInWithEmailAndPassword(auth, values.email, values.pass).then(() => {
             setSubmitButtonDisabled(false);
             navigate("/home");
-           
         }).catch(error => {
             setSubmitButtonDisabled(false);
             setError(error.message);
         });
-
         await setPersistence(auth, browserSessionPersistence);
     }
 
@@ -50,20 +46,23 @@ export default function Login() {
             <div style={{ marginTop: '200px' }} className='container'>
                 <div className="login-form">
                     <div className='image-container' >
-                        <img className="image" src={logo}/>
+                        <img className="image" src={logo} />
                     </div>
-
                     <div className="form-group">
                         <InputControl
                             type="text"
                             placeholder="Tu correo"
-                            onChange={handleEmail}></InputControl>
+                            onChange={handleEmail}>
+
+                        </InputControl>
                     </div>
                     <div className="form-group">
                         <InputControl
                             type="password"
                             placeholder="Contraseña"
-                            onChange={handlePass}></InputControl>
+                            onChange={handlePass}>
+
+                        </InputControl>
                     </div>
                     <button type="submit" onClick={authUser} className="btn btn-light btn-sm rounded btn-style">Iniciar sesión</button>
                     <div>

@@ -4,10 +4,12 @@ import '../home/home.css';
 import { auth } from "../../firebase";
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Component that gives input to the application
+ */
 
 export default function Home({ name }) {
     const navigate = useNavigate();
-
 
     const exit = () => {
         navigate("/");

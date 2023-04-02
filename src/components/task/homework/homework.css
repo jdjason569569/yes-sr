@@ -1,4 +1,4 @@
-.task-container{
+.task-container {
     display: flex;
     align-items: center;
     width: 100%;
@@ -9,7 +9,7 @@
     cursor: pointer;
 }
 
-.task-text{
+.task-text {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -22,24 +22,31 @@
     font-weight: bolder;
 }
 
-.text-date{
+.text-date {
     font-size: 10px;
     color: white;
 }
 
-.task-icon{
+.task-icon {
     width: 25px;
     height: 25px;
     margin: 5px;
 }
 
-
-
-.task-container.completed{
-   background-color: green;
-   text-decoration: line-through;
+.material-icons {
+    font-size: 30px;
+    color: white
 }
 
-.task-container.date-completed{
+.task-container.completed {
     background-color: green;
- }
+    text-decoration: line-through;
+}
+
+
+.icons {
+    display: flex;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 70px;
+    margin: 8px;
+}

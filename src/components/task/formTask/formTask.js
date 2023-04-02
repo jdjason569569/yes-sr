@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import './formTask.css';
+import { dateFormat } from "../../../utils/dateFormat";
 
-export default function ({ addTask }) {
+export default function FormTask({ addTask, taskEdit }) {
 
     const [input, setInput] = useState(null);
     const [isEnabledButton, setIsEnabledButton] = useState(true);
+    const [isEditTask, setIsEditTask] = useState(false);
 
+    useEffect(() => {
+        if (taskEdit) {
+            setInput(taskEdit.text);
+            setIsEnabledButton(false);
+            setIsEditTask(true);
+        }
+    }, [taskEdit])
 
     const handleEvent = e => {
         setInput(e.target.value);
@@ -21,25 +30,29 @@ export default function ({ addTask }) {
             addTask(createTask());
             setInput('');
             setIsEnabledButton(true);
-        }
 
+        }
     }
 
     const createTask = () => {
-        return {
-            id: uuidv4(),
-            text: input,
-            completed: false,
-            taskDate: dateFormat()
+        if (isEditTask) {
+            return {
+                id: taskEdit.id,
+                text: input,
+                completed: false,
+                taskDate: dateFormat()
+            }
+        } else {
+            return {
+                id: uuidv4(),
+                text: input,
+                completed: false,
+                taskDate: dateFormat()
+            }
         }
     }
 
-    const dateFormat = () => {
-        const dateTask = new Date();
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        
-        return dateTask.toLocaleDateString('es-ES', options);
-    }
+
 
     return (
         <form className="task-form" onSubmit={handleSend}>
@@ -53,7 +66,7 @@ export default function ({ addTask }) {
                 onChange={handleEvent}
             />
             <button hidden={isEnabledButton} className="btn-sm rounded task-botton" >
-                Agregar Tarea
+                {taskEdit ? 'Editar Tarea' : 'Agregar Tarea'}
             </button>
         </form>
     )
