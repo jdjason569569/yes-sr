@@ -2,11 +2,18 @@ import './task.css'
 import FormTask from './formTask/formTask';
 import { useState } from 'react';
 import Homeworks from './homework/homework';
+import {useFetch} from '../../customHooks/useFetch';
 
 export default function Task() {
 
   const [tasks, setTasks] = useState([]);
   const [taskEdit, setTaskEdit] = useState(null);
+  const { data , error} = useFetch('http://localhost:3001/api/tasks');
+  console.log(data);
+
+  
+
+
 
   const addTask = task => {
     if (task) {
