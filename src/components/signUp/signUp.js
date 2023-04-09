@@ -9,6 +9,7 @@ import '../signUp/signUp.css';
 
 export default function SignUp() {
 
+    const apiUrl = process.env.REACT_APP_API;
     const navigate = useNavigate();
     const [values, setValues] = useState({
         name: "",
@@ -42,7 +43,7 @@ export default function SignUp() {
             displayName: values.name,
         });
         try {
-            const responseFetch = await fetch('http://localhost:3001/api/user', {
+            const responseFetch = await fetch(`${apiUrl}/user`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -52,7 +53,7 @@ export default function SignUp() {
                 })
             });
             const response = responseFetch.json();
-            console.log('respuesta',response);
+            console.log(response);
         } catch (error) {
             console.log('error in createUserWithEmailAndPassword');
         }
