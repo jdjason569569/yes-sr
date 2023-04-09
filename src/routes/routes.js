@@ -28,10 +28,23 @@ export function MyRoutes() {
 
 
     return (
-    //     <Router>
-    //          {userName  &&  <NavigationComponent/>}
+         <Router>
+              {userName  &&  <NavigationComponent/>}
+             <Routes>
+                 <Route exact path='/' element={<Login />}></Route>
+                 <Route element={<ProtectedRoute name={userName} />}>
+                     <Route exact path='/home' element={<Home name={userName} />}></Route>
+                     <Route exact path='/home/task' element={<Task/>}></Route>
+                 </Route>
+                 <Route exact path='/signup'  element={<SignUp />}></Route>
+             </Routes>
+         </Router>
+    // );
+    // <Router>
+    //          {/* {userName  &&  <NavigationComponent/>} */}
+    //          {<NavigationComponent/>}
     //         <Routes>
-    //             <Route exact path='/' element={<Login />}></Route>
+    //             <Route exact path='/home' element={<Home />}></Route>
     //             <Route element={<ProtectedRoute name={userName} />}>
     //                 <Route exact path='/home' element={<Home name={userName} />}></Route>
     //                 <Route exact path='/home/task' element={<Task/>}></Route>
@@ -39,19 +52,6 @@ export function MyRoutes() {
     //             <Route exact path='/signup'  element={<SignUp />}></Route>
     //         </Routes>
     //     </Router>
-    // );
-    <Router>
-             {/* {userName  &&  <NavigationComponent/>} */}
-             {<NavigationComponent/>}
-            <Routes>
-                <Route exact path='/home' element={<Home />}></Route>
-                <Route element={<ProtectedRoute name={userName} />}>
-                    <Route exact path='/home' element={<Home name={userName} />}></Route>
-                    <Route exact path='/home/task' element={<Task/>}></Route>
-                </Route>
-                <Route exact path='/signup'  element={<SignUp />}></Route>
-            </Routes>
-        </Router>
     );
 }
 

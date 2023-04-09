@@ -9,7 +9,6 @@ import '../signUp/signUp.css';
 
 export default function SignUp() {
 
-    
     const navigate = useNavigate();
     const [values, setValues] = useState({
         name: "",
@@ -18,7 +17,6 @@ export default function SignUp() {
     });
     const [name, setName] = useState(null);
     const [error, setError] = useState([]);
-    const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
@@ -30,32 +28,42 @@ export default function SignUp() {
         }, []);
     });
 
-    const register = () => {
+    const register = async () => {
+
         if (!values.name || !values.email || !values.pass) {
             setError("Diligencie todos los campos");
             return;
         }
         setError("");
-        setSubmitButtonDisabled(true);
 
-        createUserWithEmailAndPassword(auth, values.email, values.pass).then(async (response) => {
-            setSubmitButtonDisabled(false);
-            const user = response.user;
-            await updateProfile(user, {
-                displayName: values.name,
-            });
-            navigate("/");
-            await auth.signOut();
-        }).catch(error => {
-            setSubmitButtonDisabled(false);
-            setError(error.message);
-
+        const responseRegister = await createUserWithEmailAndPassword(auth, values.email, values.pass);
+        const user = responseRegister.user;
+        await updateProfile(user, {
+            displayName: values.name,
         });
-
+        try {
+            const responseFetch = await fetch('http://localhost:3001/api/user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id_firebase: user.uid,
+                })
+            });
+            const response = responseFetch.json();
+            console.log('respuesta',response);
+        } catch (error) {
+            console.log('error in createUserWithEmailAndPassword');
+        }
+        navigate("/");
+        await auth.signOut();
     }
 
+
+
     return (
-        <div className={name ? 'container-signup': 'container-signup-only'}>
+        <div className={name ? 'container-signup' : 'container-signup-only'}>
             <h1 className=''>Registro</h1>
             <div className='signup-form'>
                 <InputControl placeholder="Nombre"
@@ -72,11 +80,10 @@ export default function SignUp() {
             <div className=''>
                 <b className=''>{error}</b>
                 <button onClick={register}
-                    className="btn btn-light btn-sm rounded btn-style"
-                    disabled={submitButtonDisabled}>Guardar</button>
+                    className="btn btn-light btn-sm rounded btn-style">Guardar</button>
                 {!name && <p className='p_style'>
                     Si ya tienes una cuenta
-                    <span style={{marginLeft: '5px'}}>
+                    <span style={{ marginLeft: '5px' }}>
                         <Link to="/">Login</Link>
                     </span>
                 </p>}
