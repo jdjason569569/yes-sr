@@ -1,3 +1,5 @@
+import { auth } from '../../firebase';
+
 import './task.css'
 import FormTask from './formTask/formTask';
 import { useEffect, useState } from 'react';
@@ -6,26 +8,22 @@ import Homeworks from './homework/homework';
 export default function Task() {
 
   const [tasks, setTasks] = useState([]);
+  const apiUrl = process.env.REACT_APP_API;
   const [taskEdit, setTaskEdit] = useState(null);
- 
-
-
+  const [idFirebaseUser, setIdFirebaseUser] = useState(null);
 
   useEffect(() => {
-     
-  }, []);
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+          setIdFirebaseUser(user.uid);
+        } else {
+          setIdFirebaseUser(null);
+        }
+    }, []);
+});
 
 
- 
- 
-
-
-
-
-
-
-
-  const addTask = task => {
+  const addTask =async (task) => {
     if (task) {
       const taskEdit = tasks.find(taskElement => taskElement.id === task.id)
       if (taskEdit) {
@@ -34,6 +32,8 @@ export default function Task() {
         setTasks([...updateTask]);
         setTaskEdit(null);
       } else {
+        const responseFetch = await fetch(`${apiUrl}/user/${idFirebaseUser}`);
+        const response = await responseFetch.json();
         task.text = task.text.trim();
         setTasks([task, ...tasks]);
       }
@@ -58,9 +58,6 @@ export default function Task() {
     const task = tasks.find(task => task.id === id);
     setTaskEdit(task);
   }
-
-
-
 
   return (
     <div className='container-task'>

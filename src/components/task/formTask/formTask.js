@@ -37,22 +37,20 @@ export default function FormTask({ addTask, taskEdit }) {
     const createTask = () => {
         if (isEditTask) {
             return {
-                id: taskEdit.id,
-                text: input,
+                id_task: taskEdit.id,
+                name: input,
                 completed: false,
-                taskDate: dateFormat()
+                date_register: dateFormat()
             }
         } else {
             return {
-                id: uuidv4(),
-                text: input,
+                id_task: uuidv4(),
+                name: input,
                 completed: false,
-                taskDate: dateFormat()
+                date_register: dateFormat()
             }
         }
     }
-
-
 
     return (
         <form className="task-form" onSubmit={handleSend}>

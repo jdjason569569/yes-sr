@@ -36,13 +36,13 @@ export default function SignUp() {
             return;
         }
         setError("");
-
-        const responseRegister = await createUserWithEmailAndPassword(auth, values.email, values.pass);
-        const user = responseRegister.user;
-        await updateProfile(user, {
-            displayName: values.name,
-        });
         try {
+            const responseRegister = await createUserWithEmailAndPassword(auth, values.email, values.pass);
+            const user = responseRegister.user;
+            await updateProfile(user, {
+                displayName: values.name,
+            });
+
             const responseFetch = await fetch(`${apiUrl}/user`, {
                 method: 'POST',
                 headers: {
@@ -52,10 +52,10 @@ export default function SignUp() {
                     id_firebase: user.uid,
                 })
             });
-            const response = responseFetch.json();
+            const response = await responseFetch.json();
             console.log(response);
         } catch (error) {
-            console.log('error in createUserWithEmailAndPassword');
+            console.log(error);
         }
         navigate("/");
         await auth.signOut();
