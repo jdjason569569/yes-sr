@@ -11,6 +11,7 @@ export default function Task() {
   const apiUrl = process.env.REACT_APP_API;
   const [taskEdit, setTaskEdit] = useState(null);
   const [idFirebaseUser, setIdFirebaseUser] = useState(null);
+  const [taskResponse, setTaskResponse] = useState(null);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -23,54 +24,76 @@ export default function Task() {
   }, []);
 
   useEffect(() => {
-
     const getTaskById = async () => {
       try {
-        const responseFetch = await fetch(`${apiUrl}/user/${idFirebaseUser}`);
-        const response = await responseFetch.json();
-        const responseTask = await fetch(`${apiUrl}/tasks/${response.id_users}`);
-        const responseJson = await responseTask.json();
-        setTasks(responseJson);
+        const idUser = await getUserById();
+        const responseTaskByUser = await fetch(`${apiUrl}/tasks/${idUser}`);
+        const responseTaskByUserJson = await responseTaskByUser.json();
+        setTasks(responseTaskByUserJson);
       } catch (error) {
-        console.error(error);
+        //console.error(error);
       }
     }
     getTaskById();
-  }, [idFirebaseUser])
+  }, [idFirebaseUser, taskResponse]);
+
+
+  /**
+   * Allow return an user by firebase code
+   */
+  const getUserById = async () => {
+    const respGetUserById = await fetch(`${apiUrl}/user/${idFirebaseUser}`);
+    const { id_users } = await respGetUserById.json();
+    return id_users;
+  }
+
+  /**
+   * Allow save task by user
+   */
+  const saveTaskByUser = async (task) => {
+    const responseAddTask = await fetch(`${apiUrl}/tasks`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(task)
+    });
+    return await responseAddTask.json();
+  }
 
 
   const addTask = async (task) => {
     if (task) {
-      //const taskEdit = tasks.find(taskElement => taskElement.id === task.id)
       if (taskEdit) {
-        taskEdit.text = task.text;
-        const updateTask = tasks.map(taskElement => (taskElement.id === task.id ? taskEdit : taskElement));
-        setTasks([...updateTask]);
-        setTaskEdit(null);
-      } else {
-        const responseFetch = await fetch(`${apiUrl}/user/${idFirebaseUser}`);
-        const response = await responseFetch.json();
-        task.id_users = response.id_users;
-
-        const responseFetchTask = await fetch(`${apiUrl}/tasks`, {
-          method: 'POST',
+        taskEdit.name = task.name;
+        const UpdateTask = await fetch(`${apiUrl}/tasks/${taskEdit.id_task}`, {
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(task)
+          body: JSON.stringify(taskEdit)
         });
-        const responseTask = await responseFetchTask.json();
-        console.log(responseTask);
-
-
-        task.text = task.text.trim();
-        setTasks([task, ...tasks]);
+        const responseUpdateTask = UpdateTask.json();
+        setTaskResponse(responseUpdateTask);
+        setTaskEdit(null);
+      } else {
+        const idUser = await getUserById();
+        task.id_users = idUser;
+        const responseTask = await saveTaskByUser(task);
+        setTaskResponse(responseTask);
       }
     }
   }
 
-  const deleteTask = id => {
-    setTasks(tasks.filter(task => task.id !== id));
+  const deleteTask = async (id) => {
+    const deleteTask = await fetch(`${apiUrl}/tasks/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const responseDeleteTask = deleteTask.json();
+    setTaskResponse(responseDeleteTask);
   }
 
   const completeTask = id => {
@@ -84,7 +107,7 @@ export default function Task() {
   }
 
   const editTask = id => {
-    const task = tasks.find(task => task.id === id);
+    const task = tasks.find(task => task.id_task === id);
     setTaskEdit(task);
   }
 

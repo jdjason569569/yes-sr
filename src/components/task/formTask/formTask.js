@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
 import './formTask.css';
-import { dateFormat } from "../../../utils/dateFormat";
 
 export default function FormTask({ addTask, taskEdit }) {
 
@@ -11,7 +9,7 @@ export default function FormTask({ addTask, taskEdit }) {
 
     useEffect(() => {
         if (taskEdit) {
-            setInput(taskEdit.text);
+            setInput(taskEdit.name);
             setIsEnabledButton(false);
             setIsEditTask(true);
         }
