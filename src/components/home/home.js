@@ -3,6 +3,8 @@ import '../home/home.css';
 
 import { auth } from "../../firebase";
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 
 /**
  * Component that gives input to the application
@@ -10,6 +12,12 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Home({ name }) {
     const navigate = useNavigate();
+    const [flag, setFlag] = useState(true);
+
+    useEffect(() => {
+        toast.success('Home', { autoClose: 500 }, { position: toast.POSITION.TOP_CENTER });
+    }, []);
+
 
     const exit = () => {
         navigate("/");
@@ -18,6 +26,7 @@ export default function Home({ name }) {
 
     return (
         <>
+            <ToastContainer />
             <div className="container-home">
                 <div>
                     <h2>{name ? `Bienvenido  ${name}` : "Inicia session"}</h2>

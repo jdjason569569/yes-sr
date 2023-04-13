@@ -4,6 +4,7 @@ import './task.css'
 import FormTask from './formTask/formTask';
 import { useEffect, useState } from 'react';
 import Homeworks from './homework/homework';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Task() {
 
@@ -75,12 +76,14 @@ export default function Task() {
         });
         const responseUpdateTask = UpdateTask.json();
         setTaskResponse(responseUpdateTask);
+        toast.warning('Editaste una tarea', { autoClose: 1000 }, { position: toast.POSITION.TOP_CENTER });
         setTaskEdit(null);
       } else {
         const idUser = await getUserById();
         task.id_users = idUser;
         const responseTask = await saveTaskByUser(task);
         setTaskResponse(responseTask);
+        toast.success('Agregaste una tarea', { autoClose: 1000 }, { position: toast.POSITION.TOP_CENTER });
       }
     }
   }
@@ -94,6 +97,7 @@ export default function Task() {
     });
     const responseDeleteTask = deleteTask.json();
     setTaskResponse(responseDeleteTask);
+    toast.error('Eliminaste una tarea', { autoClose: 1000 }, { position: toast.POSITION.TOP_CENTER });
   }
 
   const completeTask = id => {
@@ -114,7 +118,7 @@ export default function Task() {
   return (
     <div className='container-task'>
       <FormTask addTask={addTask} taskEdit={taskEdit}></FormTask>
-
+      <ToastContainer />
       <div className='task-list-content'>
         {
           tasks.map((task) =>

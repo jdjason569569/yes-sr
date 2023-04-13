@@ -14,8 +14,6 @@ export function MyRoutes() {
 
     const [userName, setUserName] = useState(null);
 
-    
-
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
             if (user) {
@@ -25,7 +23,6 @@ export function MyRoutes() {
             }
         }, []);
     });
-
 
     return (
          <Router>
@@ -39,19 +36,6 @@ export function MyRoutes() {
                  <Route exact path='/signup'  element={<SignUp />}></Route>
              </Routes>
          </Router>
-    // );
-    // <Router>
-    //          {/* {userName  &&  <NavigationComponent/>} */}
-    //          {<NavigationComponent/>}
-    //         <Routes>
-    //             <Route exact path='/home' element={<Home />}></Route>
-    //             <Route element={<ProtectedRoute name={userName} />}>
-    //                 <Route exact path='/home' element={<Home name={userName} />}></Route>
-    //                 <Route exact path='/home/task' element={<Task/>}></Route>
-    //             </Route>
-    //             <Route exact path='/signup'  element={<SignUp />}></Route>
-    //         </Routes>
-    //     </Router>
     );
 }
 

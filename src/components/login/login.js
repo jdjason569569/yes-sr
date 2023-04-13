@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { InputControl } from '../shared/inputControl/inputControl';
 import '../login/login.css';
 import logo from '../../assets/yesSr.png';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 export default function Login() {
@@ -21,7 +22,7 @@ export default function Login() {
 
     const authUser = async () => {
         if (!values.email || !values.pass) {
-            setError("Datos incompletos");
+            toast.error("Datos incompletos",{autoClose:2000} ,{position: toast.POSITION.TOP_CENTER});
             return;
         }
         setSubmitButtonDisabled(true);
@@ -29,10 +30,8 @@ export default function Login() {
             setSubmitButtonDisabled(false);
             navigate("/home");
         }).catch(error => {
-            setSubmitButtonDisabled(false);
-            setError(error.message);
+            toast.error(error.message,{autoClose:2000} ,{position: toast.POSITION.TOP_CENTER});
         });
-        await setPersistence(auth, browserSessionPersistence);
     }
 
     const handleEmail = (event) => {
@@ -43,6 +42,7 @@ export default function Login() {
     }
     return (
         <>
+         <ToastContainer/>
             <div style={{ marginTop: '200px' }} className='container'>
                 <div className="login-form">
                     <div className='image-container' >
