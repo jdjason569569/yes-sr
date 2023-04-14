@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 import { InputControl } from '../shared/inputControl/inputControl';
 import '../signUp/signUp.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 export default function SignUp() {
@@ -18,8 +19,9 @@ export default function SignUp() {
     });
     const [name, setName] = useState(null);
     const [error, setError] = useState([]);
-
+    
     useEffect(() => {
+        
         auth.onAuthStateChanged((user) => {
             if (user) {
                 setName(user.email);
@@ -65,6 +67,7 @@ export default function SignUp() {
 
     return (
         <div className={name ? 'container-signup' : 'container-signup-only'}>
+            <ToastContainer />
             <h1 className=''>Registro</h1>
             <div className='signup-form'>
                 <InputControl placeholder="Nombre"

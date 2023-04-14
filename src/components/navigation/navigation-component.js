@@ -25,12 +25,12 @@ export default function NavigationComponent() {
                             </Link>
                         </div>
                         <div className="_btn">
-                            <Link to={`${pathname}/task`}>
+                            <Link to={pathname !== 'home' ? `home/task` : 'home/task'}>
                                 <i className="material-icons md-36">add_task</i>
                             </Link>
                         </div>
                         <div className="_btn">
-                            <Link to={'/signup'}>
+                            <Link to={pathname !== 'home' ? `/signup` : 'home/signup'}>
                                 <i className="material-icons md-36">create</i>
                             </Link>
                         </div>
