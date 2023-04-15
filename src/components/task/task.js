@@ -27,6 +27,7 @@ export default function Task() {
   useEffect(() => {
     const getTaskById = async () => {
       try {
+        console.log(apiUrl);
         const idUser = await getUserById();
         const responseTaskByUser = await fetch(`${apiUrl}/tasks/${idUser}`);
         const responseTaskByUserJson = await responseTaskByUser.json();
