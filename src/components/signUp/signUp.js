@@ -45,18 +45,21 @@ export default function SignUp() {
                 displayName: values.name,
             });
 
-            const responseFetch = await fetch(`${apiUrl}/user`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Referrer-Policy': 'strict-origin-when-cross-origin'
-                },
-                body: JSON.stringify({
-                    id_firebase: user.uid,
-                })
-            });
-            const response = await responseFetch.json();
-            console.log(response);
+            if(apiUrl){
+                const responseFetch = await fetch(`${apiUrl}/user`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Referrer-Policy': 'strict-origin-when-cross-origin'
+                    },
+                    body: JSON.stringify({
+                        id_firebase: user.uid,
+                    })
+                });
+                const response = await responseFetch.json();
+                console.log(response);
+            }
+            
         } catch (error) {
             console.log(error);
         }
