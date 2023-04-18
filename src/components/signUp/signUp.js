@@ -49,8 +49,7 @@ export default function SignUp() {
                 const responseFetch = await fetch(`${apiUrl}/user`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Referrer-Policy': 'strict-origin-when-cross-origin'
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         id_firebase: user.uid,
