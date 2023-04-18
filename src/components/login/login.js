@@ -64,7 +64,7 @@ export default function Login() {
 
                         </InputControl>
                     </div>
-                    <button type="submit" onClick={authUser} className="btn btn-light btn-sm rounded btn-style">Iniciar sesión cambio</button>
+                    <button type="submit" onClick={authUser} className="btn btn-light btn-sm rounded btn-style">Iniciar sesión</button>
                     <div>
                         <Link to="/signup" className='create-font'>Crear cuenta</Link>
                     </div>
