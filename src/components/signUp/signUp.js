@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 export default function SignUp() {
 
-    const apiUrl = process.env.REACT_APP_API;
+    const [apiUrl, setApiUrl] = useState(process.env.REACT_APP_API);
     const navigate = useNavigate();
     const [values, setValues] = useState({
         name: "",
@@ -48,7 +48,8 @@ export default function SignUp() {
             const responseFetch = await fetch(`${apiUrl}/user`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Referrer-Policy': 'strict-origin-when-cross-origin'
                 },
                 body: JSON.stringify({
                     id_firebase: user.uid,
