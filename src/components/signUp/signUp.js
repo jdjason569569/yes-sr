@@ -44,9 +44,8 @@ export default function SignUp() {
             await updateProfile(user, {
                 displayName: values.name,
             });
-            
-            //const responseFetch = await fetch(`${apiUrl}/user`, {
-                const responseFetch = await fetch(`https://si-senor.netlify.app/api/user`, {
+
+            const responseFetch = await fetch(`${apiUrl}/user`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
