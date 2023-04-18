@@ -9,13 +9,12 @@ import { ToastContainer, toast } from 'react-toastify';
 export default function Task() {
 
   const [tasks, setTasks] = useState([]);
-  const [apiUrl, setApiUrl] = useState("");
+  const [apiUrl, setApiUrl] = useState(process.env.REACT_APP_API);
   const [taskEdit, setTaskEdit] = useState(null);
   const [idFirebaseUser, setIdFirebaseUser] = useState(null);
   const [taskResponse, setTaskResponse] = useState(null);
 
   useEffect(() => {
-    setApiUrl(process.env.REACT_APP_API);
     auth.onAuthStateChanged((user) => {
       if (user) {
         setIdFirebaseUser(user.uid);
