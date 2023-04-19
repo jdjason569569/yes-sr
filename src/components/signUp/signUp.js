@@ -21,7 +21,6 @@ export default function SignUp() {
     const [error, setError] = useState([]);
     
     useEffect(() => {
-        setApiUrl()
         auth.onAuthStateChanged((user) => {
             if (user) {
                 setName(user.email);
