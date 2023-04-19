@@ -15,7 +15,7 @@ export default function Task() {
   const [taskResponse, setTaskResponse] = useState(null);
 
   useEffect(() => {
-    
+
     auth.onAuthStateChanged((user) => {
       if (user) {
         setIdFirebaseUser(user.uid);
@@ -114,7 +114,8 @@ export default function Task() {
       body: JSON.stringify(task)
     });
     const responseUpdateTask = UpdateTask.json();
-        setTaskResponse(responseUpdateTask);
+    setTaskResponse(responseUpdateTask);
+    toast.done('Completaste una tarea', { autoClose: 1000 }, { position: toast.POSITION.TOP_CENTER });
   }
 
   const editTask = id => {
