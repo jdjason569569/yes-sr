@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 import { InputControl } from '../shared/inputControl/inputControl';
 import '../signUp/signUp.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 
 export default function SignUp() {
@@ -21,7 +21,7 @@ export default function SignUp() {
     const [error, setError] = useState([]);
     
     useEffect(() => {
-        
+        setApiUrl()
         auth.onAuthStateChanged((user) => {
             if (user) {
                 setName(user.email);

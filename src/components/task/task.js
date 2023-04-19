@@ -15,6 +15,7 @@ export default function Task() {
   const [taskResponse, setTaskResponse] = useState(null);
 
   useEffect(() => {
+    
     auth.onAuthStateChanged((user) => {
       if (user) {
         setIdFirebaseUser(user.uid);
@@ -101,14 +102,19 @@ export default function Task() {
     toast.error('Eliminaste una tarea', { autoClose: 1000 }, { position: toast.POSITION.TOP_CENTER });
   }
 
-  const completeTask = id => {
-    const updatedTask = tasks.map(task => {
-      if (task.id === id) {
-        task.completed = !task.completed;
-      }
-      return task;
+  const completeTask = async (id) => {
+    const task = tasks.find(task => task.id_task === id);
+    task.completed = !task.completed;
+
+    const UpdateTask = await fetch(`${apiUrl}/tasks/${task.id_task}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(task)
     });
-    setTasks(updatedTask);
+    const responseUpdateTask = UpdateTask.json();
+        setTaskResponse(responseUpdateTask);
   }
 
   const editTask = id => {
