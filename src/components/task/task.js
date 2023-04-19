@@ -115,7 +115,7 @@ export default function Task() {
     });
     const responseUpdateTask = UpdateTask.json();
     setTaskResponse(responseUpdateTask);
-    toast.done('Completaste una tarea', { autoClose: 1000 }, { position: toast.POSITION.TOP_CENTER });
+    toast.success('Completaste una tarea', { autoClose: 1000 }, { position: toast.POSITION.TOP_CENTER });
   }
 
   const editTask = id => {
