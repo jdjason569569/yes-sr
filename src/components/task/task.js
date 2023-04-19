@@ -115,7 +115,12 @@ export default function Task() {
     });
     const responseUpdateTask = UpdateTask.json();
     setTaskResponse(responseUpdateTask);
-    toast.success('Completaste una tarea', { autoClose: 1000 }, { position: toast.POSITION.TOP_CENTER });
+    if(task.completed){
+      toast.success('Completaste una tarea', { autoClose: 1000 }, { position: toast.POSITION.TOP_CENTER });
+    }else{
+      toast.warning('Desmarcaste una tarea', { autoClose: 1000 }, { position: toast.POSITION.TOP_CENTER });
+    }
+    
   }
 
   const editTask = id => {
