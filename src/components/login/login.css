@@ -14,7 +14,7 @@
 }
 
 .form-group {
-    margin-bottom: 20px
+    margin-bottom: 10px
 }
 
 .create-font{
@@ -36,4 +36,8 @@
 
 .btn-style{
     box-shadow: 2px 2px 5px 1px black;
+}
+
+.btn-pass{
+    margin-left: 200px;
 }
