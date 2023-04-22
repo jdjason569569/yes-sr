@@ -132,7 +132,7 @@ export default function Task() {
 
   return (
     <div className='container-task'>
-      {isLoading ? (<p>Cargando informacion...</p>) : (<div><FormTask addTask={addTask} taskEdit={taskEdit}></FormTask>
+      {isLoading ? (<p>Cargando informacion...</p>) : (<><FormTask addTask={addTask} taskEdit={taskEdit}></FormTask>
         <ToastContainer />
         <div className='task-list-content'>
           {
@@ -148,6 +148,6 @@ export default function Task() {
                 editTask={editTask} />)
           }
         </div>
-      </div>)}
+      </>)}
     </div>)
 }
