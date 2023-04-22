@@ -13,8 +13,15 @@ import NavigationComponent from '../components/navigation/navigation-component';
 export function MyRoutes() {
 
     const [userName, setUserName] = useState(null);
+    const TIMEOUT = 3600000; 
 
     useEffect(() => {
+
+        let timer = setTimeout(() => {
+            auth.signOut();
+          }, TIMEOUT);
+
+    
         auth.onAuthStateChanged((user) => {
             if (user) {
                 setUserName(user.displayName);
@@ -22,6 +29,10 @@ export function MyRoutes() {
                 setUserName(null);
             }
         }, []);
+
+        return () => {
+            clearTimeout(timer);
+        }
     });
 
     return (

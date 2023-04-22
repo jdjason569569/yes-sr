@@ -10,6 +10,7 @@ export default function Task() {
 
   const [tasks, setTasks] = useState([]);
   const [apiUrl, setApiUrl] = useState(process.env.REACT_APP_API);
+  const [isLoading, setIsLoading] = useState(false);
   const [taskEdit, setTaskEdit] = useState(null);
   const [idFirebaseUser, setIdFirebaseUser] = useState(null);
   const [taskResponse, setTaskResponse] = useState(null);
@@ -28,13 +29,14 @@ export default function Task() {
   useEffect(() => {
     const getTaskById = async () => {
       try {
-        console.log(apiUrl);
+        setIsLoading(true);
         const idUser = await getUserById();
         const responseTaskByUser = await fetch(`${apiUrl}/tasks/${idUser}`);
         const responseTaskByUserJson = await responseTaskByUser.json();
         setTasks(responseTaskByUserJson);
+        setIsLoading(false);
       } catch (error) {
-        //console.error(error);
+        console.error(error);
       }
     }
     getTaskById();
@@ -115,12 +117,12 @@ export default function Task() {
     });
     const responseUpdateTask = UpdateTask.json();
     setTaskResponse(responseUpdateTask);
-    if(task.completed){
+    if (task.completed) {
       toast.success('Completaste una tarea', { autoClose: 1000 }, { position: toast.POSITION.TOP_CENTER });
-    }else{
+    } else {
       toast.warning('Desmarcaste una tarea', { autoClose: 1000 }, { position: toast.POSITION.TOP_CENTER });
     }
-    
+
   }
 
   const editTask = id => {
@@ -130,21 +132,22 @@ export default function Task() {
 
   return (
     <div className='container-task'>
-      <FormTask addTask={addTask} taskEdit={taskEdit}></FormTask>
-      <ToastContainer />
-      <div className='task-list-content'>
-        {
-          tasks.map((task) =>
-            <Homeworks
-              key={task.id_task}
-              id={task.id_task}
-              text={task.name}
-              taskDate={task.date_register}
-              completed={task.completed}
-              deleteTask={deleteTask}
-              completeTask={completeTask}
-              editTask={editTask} />)
-        }
-      </div>
+      {isLoading ? (<p>Cargando informacion...</p>) : (<div><FormTask addTask={addTask} taskEdit={taskEdit}></FormTask>
+        <ToastContainer />
+        <div className='task-list-content'>
+          {
+            tasks.map((task) =>
+              <Homeworks
+                key={task.id_task}
+                id={task.id_task}
+                text={task.name}
+                taskDate={task.date_register}
+                completed={task.completed}
+                deleteTask={deleteTask}
+                completeTask={completeTask}
+                editTask={editTask} />)
+          }
+        </div>
+      </div>)}
     </div>)
 }

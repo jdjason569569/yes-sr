@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Home({ name }) {
     const navigate = useNavigate();
+    
 
     const exit = () => {
         navigate("/");
