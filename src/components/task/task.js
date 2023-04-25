@@ -132,8 +132,8 @@ export default function Task() {
 
   return (
     <div className='container-task'>
+       <ToastContainer />
       {isLoading ? (<p>Cargando informacion...</p>) : (<><FormTask addTask={addTask} taskEdit={taskEdit}></FormTask>
-        <ToastContainer />
         <div className='task-list-content'>
           {
             tasks.map((task) =>
