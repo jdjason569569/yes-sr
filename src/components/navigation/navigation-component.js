@@ -25,7 +25,7 @@ export default function NavigationComponent() {
                             </Link>
                         </div>
                         <div className="_btn">
-                            <Link to={pathname !== 'home' ? `home/task` : 'home/task'}>
+                            <Link to={'home/task'}>
                                 <i className="material-icons md-36">add_task</i>
                             </Link>
                         </div>
@@ -35,28 +35,8 @@ export default function NavigationComponent() {
                             </Link>
                         </div>
                         <div className="_btn">
-                            <Link to={`${pathname}/task`}>
-                                <i className="material-icons md-36">close</i>
-                            </Link>
-                        </div>
-                        <div className="_btn">
-                            <Link to={`${pathname}/task`}>
-                                <i className="material-icons md-36">close</i>
-                            </Link>
-                        </div>
-                        <div className="_btn">
-                            <Link to={`${pathname}/task`}>
-                                <i className="material-icons md-36">close</i>
-                            </Link>
-                        </div>
-                        <div className="_btn">
-                            <Link to={`${pathname}/task`}>
-                                <i className="material-icons md-36">close</i>
-                            </Link>
-                        </div>
-                        <div className="_btn">
-                            <Link to={`${pathname}/task`}>
-                                <i className="material-icons md-36">close</i>
+                            <Link to={`home/image`}>
+                                <i className="material-icons md-36">image</i>
                             </Link>
                         </div>
                     </label>
