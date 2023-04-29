@@ -83,7 +83,7 @@ export default function Image() {
     return await responseAddImage.json();
   }
   return (
-    <div className='container'>
+    <div className='container-img'>
       <ToastContainer />
       <label htmlFor="fileInput">
         <input type='file' id="fileInput" accept='image/*' label='Selecciona una imagen' onChange={e => uploadImage(e.target.files[0])}></input>
