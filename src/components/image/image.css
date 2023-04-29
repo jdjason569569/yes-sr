@@ -1,8 +1,22 @@
-.container-image{
+.container {
     display: flex;
     flex-wrap: wrap;
     border-radius: 20px;
     justify-content: center;
-    margin-top:350px;
+    margin-top: 350px;
     box-shadow: 2px 10px 15px 1px black;
+}
+
+.container-image {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.image-component {
+    width: 20%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 10px;
 }
