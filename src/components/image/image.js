@@ -91,10 +91,10 @@ export default function Image() {
   new Promise((resolve) => {
     Resizer.imageFileResizer(
       file,
-      100, // Ancho máximo
-      100, // Altura máxima
+      500, // Ancho máximo
+      500, // Altura máxima
       'JPEG', // Formato de imagen
-      20, // Calidad de compresión
+      80, // Calidad de compresión
       0, // Rotación (0 = sin rotación)
       (uri) => {
         resolve(uri);
