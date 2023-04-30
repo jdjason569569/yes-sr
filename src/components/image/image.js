@@ -94,7 +94,7 @@ export default function Image() {
       500, // Ancho máximo
       500, // Altura máxima
       'JPEG', // Formato de imagen
-      80, // Calidad de compresión
+      20, // Calidad de compresión
       0, // Rotación (0 = sin rotación)
       (uri) => {
         resolve(uri);
