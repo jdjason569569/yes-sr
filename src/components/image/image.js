@@ -3,6 +3,8 @@ import { auth, storage } from '../../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './image.css';
 import { ToastContainer, toast } from 'react-toastify';
+import Resizer from 'react-image-file-resizer';
+
 
 export default function Image() {
   const [idFirebaseUser, setIdFirebaseUser] = useState(null);
@@ -40,9 +42,10 @@ export default function Image() {
 
   const uploadImage = async (file) => {
     try {
+      const resizedImage = await resizeFile(file);
       const date = new Date();
       const storageRef = ref(storage, `${idFirebaseUser.slice(0, 5)}-${date.getMilliseconds().toString()}`);
-      await uploadBytes(storageRef, file);
+      await uploadBytes(storageRef, resizedImage);
       const url = await getDownloadURL(storageRef);
       const responseTask = await saveImageByUser(url);
       setImageResponse(responseTask);
@@ -82,6 +85,23 @@ export default function Image() {
     });
     return await responseAddImage.json();
   }
+  
+
+  const resizeFile = (file) =>
+  new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file,
+      100, // Ancho máximo
+      100, // Altura máxima
+      'JPEG', // Formato de imagen
+      95, // Calidad de compresión
+      0, // Rotación (0 = sin rotación)
+      (uri) => {
+        resolve(uri);
+      },
+      'file' // Tipo de salida (base64, blob, file)
+    );
+  });
   return (
     <div className='container-img'>
       <ToastContainer />
