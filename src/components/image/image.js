@@ -105,7 +105,7 @@ export default function Image() {
   return (
     <div className='container-img'>
       <ToastContainer />
-        <input className="btn btn-light btn-sm rounded btn-style-image" type='file' id="fileInput" 
+        <input className="btn btn-secondary btn-sm btn-style-image" type='file' id="fileInput" 
         accept='image/*' 
         onChange={e => uploadImage(e.target.files[0])}></input>
       <div className='container-image'>
