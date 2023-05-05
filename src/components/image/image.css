@@ -26,5 +26,6 @@
 
 .btn-style-image{
     width: 100%;
+    height: auto;
     box-shadow: 2px 2px 5px 1px gray;
 }
