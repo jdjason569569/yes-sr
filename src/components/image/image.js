@@ -4,6 +4,7 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './image.css';
 import { ToastContainer, toast } from 'react-toastify';
 import Resizer from 'react-image-file-resizer';
+import ReactLoading from 'react-loading';
 
 
 export default function Image() {
@@ -42,6 +43,7 @@ export default function Image() {
 
   const uploadImage = async (file) => {
     try {
+      setIsLoading(true);
       const resizedImage = await resizeFile(file);
       const date = new Date();
       const storageRef = ref(storage, `${idFirebaseUser.slice(0, 5)}-${date.getMilliseconds().toString()}`);
@@ -49,6 +51,7 @@ export default function Image() {
       const url = await getDownloadURL(storageRef);
       const responseTask = await saveImageByUser(url);
       setImageResponse(responseTask);
+      setIsLoading(false);
       document.getElementById('fileInput').value = '';
       toast.success('Agregaste una imagen', { autoClose: 1000 }, { position: toast.POSITION.TOP_CENTER });
     } catch (error) {
@@ -65,8 +68,6 @@ export default function Image() {
     const { id_users } = await respGetUserById.json();
     return id_users;
   }
-
-
   /**
    * Allow save task by user
    */
@@ -108,10 +109,14 @@ export default function Image() {
         <input className="btn btn-secondary btn-sm btn-style-image" type='file' id="fileInput" 
         accept='image/*' 
         onChange={e => uploadImage(e.target.files[0])}></input>
-      <div className='container-image'>
-        {images.map(image => (
+        {isLoading && 
+        <div className="loading-container">
+          <ReactLoading type={'bubbles'} color={'red'} height={'15%'} width={'15%'} />
+        </div>} 
+        <div className='container-image'>
+        {!isLoading ?  images.map(image => (
           <img className='image-component' key={image.id_images} src={image.name} />
-        ))};
+        )):  <div style={{ display: 'none' }}></div>}
       </div>
     </div>
   )
