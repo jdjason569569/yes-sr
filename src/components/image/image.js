@@ -105,16 +105,14 @@ export default function Image() {
   return (
     <div className='container-img'>
       <ToastContainer />
-      <label htmlFor="fileInput">
-        <input type='file' id="fileInput" accept='image/*' label='Selecciona una imagen' onChange={e => uploadImage(e.target.files[0])}></input>
-      </label>
+        <input className="btn btn-light btn-sm rounded btn-style-image" type='file' id="fileInput" 
+        accept='image/*' 
+        onChange={e => uploadImage(e.target.files[0])}></input>
       <div className='container-image'>
         {images.map(image => (
           <img className='image-component' key={image.id_images} src={image.name} />
         ))};
-
       </div>
-
     </div>
   )
 }

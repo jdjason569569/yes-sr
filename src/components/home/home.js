@@ -12,12 +12,10 @@ import { useNavigate } from 'react-router-dom';
 export default function Home({ name }) {
     const navigate = useNavigate();
     
-
     const exit = () => {
         navigate("/");
         return auth.signOut();
     }
-
     return (
         <>
             <div className="container-home">
