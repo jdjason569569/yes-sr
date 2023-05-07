@@ -1,0 +1,9 @@
+
+
+.image-component {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 10px;
+}

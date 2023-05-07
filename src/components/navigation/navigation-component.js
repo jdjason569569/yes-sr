@@ -13,9 +13,8 @@ export default function NavigationComponent() {
         if(!isActive){
             checkbox.click();     
         }
-    })
+    });
     
- 
     const { pathname } = useLocation();
     return (
         <>

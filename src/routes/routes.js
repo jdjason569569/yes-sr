@@ -9,6 +9,7 @@ import { ProtectedRoute } from '../components/shared/protectedRoute';
 import Task from '../components/task/task';
 import NavigationComponent from '../components/navigation/navigation-component';
 import Image from '../components/image/image';
+import DetailImage from '../components/image/detail-image/detail-image';
 
 
 export function MyRoutes() {
@@ -45,6 +46,7 @@ export function MyRoutes() {
                      <Route exact path='/home' element={<Home name={userName} />}></Route>
                      <Route exact path='/home/task' element={<Task/>}></Route>
                      <Route exact path='/home/image' element={<Image/>}></Route>
+                     <Route exact path='/home/image/:idImage' element={<DetailImage/>}></Route>
                  </Route>
                  <Route exact path='/signup'  element={<SignUp />}></Route>
              </Routes>

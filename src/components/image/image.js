@@ -5,6 +5,7 @@ import './image.css';
 import { ToastContainer, toast } from 'react-toastify';
 import Resizer from 'react-image-file-resizer';
 import ReactLoading from 'react-loading';
+import SingleImage from './single-image/single-image';
 
 
 export default function Image() {
@@ -114,9 +115,9 @@ export default function Image() {
           <ReactLoading type={'bubbles'} color={'red'} height={'15%'} width={'15%'} />
         </div>} 
         <div className='container-image'>
-        {!isLoading ?  images.map(image => (
-          <img className='image-component' key={image.id_images} src={image.name} />
-        )):  <div style={{ display: 'none' }}></div>}
+        {!isLoading &&  images.map(image => (
+           <SingleImage key={image.id_images} image={image}/>
+        ))}
       </div>
     </div>
   )
