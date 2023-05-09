@@ -36,7 +36,6 @@ export default function DetailImage() {
         if(deleteTask){
           navigate('/home/image');
         }
-        
       } catch (error) {
         console.error(error);
       }
