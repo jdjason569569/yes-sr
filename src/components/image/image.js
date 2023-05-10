@@ -10,10 +10,10 @@ import SingleImage from './single-image/single-image';
 
 export default function Image() {
   const [idFirebaseUser, setIdFirebaseUser] = useState(null);
-  const [apiUrl, setApiUrl] = useState(process.env.REACT_APP_API);
   const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState([]);
   const [imageResponse, setImageResponse] = useState(null);
+  const apiUrl = process.env.REACT_APP_API;
 
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function Image() {
         setIdFirebaseUser(null);
       }
     });
-  }, []);
+  }, [apiUrl]);
 
   useEffect(() => {
     const getImageById = async () => {
@@ -36,7 +36,7 @@ export default function Image() {
         setImages(responseImageByUserJson);
         setIsLoading(false);
       } catch (error) {
-        console.error(error);
+        //console.error(error);
       }
     }
     getImageById();
@@ -56,7 +56,7 @@ export default function Image() {
       document.getElementById('fileInput').value = '';
       toast.success('Agregaste una imagen', { autoClose: 1000 }, { position: toast.POSITION.TOP_CENTER });
     } catch (error) {
-      console.log('error in uploadImage', error);
+      //console.log('error in uploadImage', error);
       toast.error('Error al agregar una imagen', { autoClose: 1000 }, { position: toast.POSITION.TOP_CENTER });
     }
   }

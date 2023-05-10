@@ -1,19 +1,36 @@
 import '../navigation/navigation-component.css';
-
+import { auth } from "../../firebase";
 import logo from '../../assets/yesSr.png';
 import { Link, useLocation } from "react-router-dom"
 import { useEffect } from 'react';
+import { useState } from 'react';
 
 
 export default function NavigationComponent() {
 
+    const [lastActivity, setLastActivity] = useState(Date.now());
+
     useEffect(() => {
+        setLastActivity(Date.now());
         const checkbox = document.querySelector('#toggle');
         const isActive = document.querySelector('#toggle').checked;
         if(!isActive){
             checkbox.click();     
         }
     });
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+          const currentTime = Date.now();
+          const inactivityTime = currentTime - lastActivity;
+          const maxInactivityTime = 60 * 1000; 
+          if (inactivityTime > maxInactivityTime) {
+            auth.signOut(); // Cerrar sesión en Firebase
+          }
+        }, 120000); 
+    
+        return () => clearTimeout(timeout);
+      }, [lastActivity]);
     
     const { pathname } = useLocation();
     return (

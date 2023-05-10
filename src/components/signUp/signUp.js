@@ -10,7 +10,7 @@ import { ToastContainer } from 'react-toastify';
 
 export default function SignUp() {
 
-    const [apiUrl, setApiUrl] = useState(process.env.REACT_APP_API);
+    const apiUrl = process.env.REACT_APP_API;
     const navigate = useNavigate();
     const [values, setValues] = useState({
         name: "",
@@ -45,7 +45,7 @@ export default function SignUp() {
             });
 
             if(apiUrl){
-                const responseFetch = await fetch(`${apiUrl}/user`, {
+                await fetch(`${apiUrl}/user`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -54,12 +54,10 @@ export default function SignUp() {
                         id_firebase: user.uid,
                     })
                 });
-                const response = await responseFetch.json();
-                console.log(response);
             }
             
         } catch (error) {
-            console.log(error);
+           // console.log(error);
         }
         navigate("/");
         await auth.signOut();
@@ -83,8 +81,8 @@ export default function SignUp() {
                 <InputControl placeholder="Password"
                     onChange={(event) => setValues((prev) => ({ ...prev, pass: event.target.value }))} />
             </div>
-            <div className=''>
-                <b className=''>{error}</b>
+            <div>
+                <b>{error}</b>
                 <button onClick={register}
                     className="btn btn-light btn-sm rounded btn-style">Guardar</button>
                 {!name && <p className='p_style'>

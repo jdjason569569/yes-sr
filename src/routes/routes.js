@@ -15,26 +15,15 @@ import DetailImage from '../components/image/detail-image/detail-image';
 export function MyRoutes() {
 
     const [userName, setUserName] = useState(null);
-    const TIMEOUT = 3600000; 
-
-    useEffect(() => {
-
-        let timer = setTimeout(() => {
-            auth.signOut();
-          }, TIMEOUT);
-
     
+    useEffect(() => {
         auth.onAuthStateChanged((user) => {
             if (user) {
                 setUserName(user.displayName);
             } else {
                 setUserName(null);
             }
-        }, []);
-
-        return () => {
-            clearTimeout(timer);
-        }
+        }); 
     });
 
     return (

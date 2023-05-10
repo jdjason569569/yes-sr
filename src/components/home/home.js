@@ -1,6 +1,5 @@
 import '../home/home.css';
 
-
 import { auth } from "../../firebase";
 import { useNavigate } from 'react-router-dom';
 

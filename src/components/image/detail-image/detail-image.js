@@ -9,21 +9,21 @@ export default function DetailImage() {
     const { idImage } = useParams();
     const navigate = useNavigate();
     const [image, setImage] = useState([]);
-    const [apiUrl, setApiUrl] = useState(process.env.REACT_APP_API);
+    const apiUrl = process.env.REACT_APP_API;
 
     useEffect(() => {
         const getImageById = async () => {
             try {
               const responseImageById = await fetch(`${apiUrl}/images/detail/${idImage}`);
               const responseImageByIdJson = await responseImageById.json();
-              console.log(responseImageByIdJson);
+              //console.log(responseImageByIdJson);
               setImage(responseImageByIdJson[0]);
             } catch (error) {
               console.error(error);
             }
           }
           getImageById();
-    }, []);
+    }, [apiUrl, idImage]);
 
     const deleteImage =   async () =>{
       try {

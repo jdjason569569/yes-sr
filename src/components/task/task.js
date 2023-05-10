@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 export default function Task() {
 
   const [tasks, setTasks] = useState([]);
-  const [apiUrl, setApiUrl] = useState(process.env.REACT_APP_API);
+  const apiUrl = process.env.REACT_APP_API;
   const [isLoading, setIsLoading] = useState(false);
   const [taskEdit, setTaskEdit] = useState(null);
   const [idFirebaseUser, setIdFirebaseUser] = useState(null);
@@ -24,7 +24,7 @@ export default function Task() {
         setIdFirebaseUser(null);
       }
     });
-  }, []);
+  }, [apiUrl]);
 
   useEffect(() => {
     const getTaskById = async () => {
@@ -36,7 +36,7 @@ export default function Task() {
         setTasks(responseTaskByUserJson);
         setIsLoading(false);
       } catch (error) {
-        console.error(error);
+        //console.error(error);
       }
     }
     getTaskById();
@@ -48,8 +48,8 @@ export default function Task() {
    */
   const getUserById = async () => {
     const respGetUserById = await fetch(`${apiUrl}/user/${idFirebaseUser}`);
-    const { id_users } = await respGetUserById.json();
-    return id_users;
+    const response= await respGetUserById.json();
+    return response.id_users;
   }
 
   /**

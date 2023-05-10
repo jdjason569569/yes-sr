@@ -27,7 +27,6 @@ export default function Login() {
         }, []);
     });
    
-
     const authUser = async () => {
         if (!values.email || !values.pass) {
             toast.error("Datos incompletos", { autoClose: 2000 }, { position: toast.POSITION.TOP_CENTER });
@@ -39,8 +38,6 @@ export default function Login() {
         }catch (error) { 
             toast.error(error.message, { autoClose: 2000 }, { position: toast.POSITION.TOP_CENTER });
         }
-
-
     }
 
     const handleEmail = (event) => {
@@ -77,7 +74,7 @@ export default function Login() {
                             onChange={handlePass}>
                         </InputControl>
                         <button className="btn btn-light btn-sm btn-pass" onClick={togglePassword}>
-                            <span class="bi bi-eye-fill"></span>
+                            <span className="bi bi-eye-fill"></span>
                         </button>
                     </div>
                     <button type="submit" onClick={authUser} className="btn btn-light btn-sm rounded btn-style">Iniciar sesión</button>
