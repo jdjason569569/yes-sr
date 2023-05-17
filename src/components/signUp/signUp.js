@@ -31,7 +31,6 @@ export default function SignUp() {
     });
 
     const register = async () => {
-
         if (!values.name || !values.email || !values.pass) {
             setError("Diligencie todos los campos");
             return;
@@ -43,7 +42,6 @@ export default function SignUp() {
             await updateProfile(user, {
                 displayName: values.name,
             });
-
             if(apiUrl){
                 await fetch(`${apiUrl}/user`, {
                     method: 'POST',
@@ -52,6 +50,7 @@ export default function SignUp() {
                     },
                     body: JSON.stringify({
                         id_firebase: user.uid,
+                        email: values.email
                     })
                 });
             }
